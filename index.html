@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Joe's Hotdogs Menu</title>
+</head>
+<body>
+    <h1>Joe's Hotdogs Menu</h1>
+
+    <!-- Using a JSON object -->
+    <h2>Menu using a JSON object</h2>
+    <ul id="menu-json"></ul>
+
+    <!-- Using a function object -->
+    <h2>Menu using a function object</h2>
+    <ul id="menu-function"></ul>
+
+    <script>
+        // Function to display menu using a JSON object
+        function displayMenuJSON() {
+            const menuJSON = '{"hotdog": 4, "fries": 3.50, "soda": 1.50, "sauerkraut": 1}';
+            const menu = JSON.parse(menuJSON);
+            const menuListJSON = document.getElementById('menu-json');
+
+            for (const item in menu) {
+                const listItem = document.createElement('li');
+                listItem.textContent = `${item}: $${menu[item].toFixed(2)}`;
+                menuListJSON.appendChild(listItem);
+            }
+        }
+
+        // Function to display menu using a function object
+        function displayMenuFunction() {
+            function MenuItem(name, price) {
+                this.name = name;
+                this.price = price;
+            }
+
+            const menuItems = [
+                new MenuItem("hotdog", 4),
+                new MenuItem("fries", 3.50),
+                new MenuItem("soda", 1.50),
+                new MenuItem("sauerkraut", 1)
+            ];
+
+            const menuListFunction = document.getElementById('menu-function');
+
+            menuItems.forEach(item => {
+                const listItem = document.createElement('li');
+                listItem.textContent = `${item.name}: $${item.price.toFixed(2)}`;
+                menuListFunction.appendChild(listItem);
+            });
+        }
+
+        // Call the functions to display the menu
+        displayMenuJSON();
+        displayMenuFunction();
+    </script>
+</body>
+</html>
